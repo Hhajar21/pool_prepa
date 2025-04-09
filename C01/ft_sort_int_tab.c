@@ -1,4 +1,5 @@
 #include "unistd.h"
+#include <stdlib.h>
 void ft_sort_int_tab(int *tab, int size){
     int temp , i;
     while (size  >= 0)
@@ -29,4 +30,5 @@ int main(){
         ft_putchar( teb[i] + '0');
     }
     write(1,"\n",1);
+  
 }
