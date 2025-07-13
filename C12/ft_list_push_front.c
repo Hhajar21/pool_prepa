@@ -12,7 +12,7 @@ void ft_print_list(t_list *head){
     t_list *node = head;
     while (node != NULL)
     {
-        printf("%d -> ", *(char *)(node->data));
+        printf("%d -> ", *(int *)(node->data));
         node = node->next;
     }
     printf("NULL\n");

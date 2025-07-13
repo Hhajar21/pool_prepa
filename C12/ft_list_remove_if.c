@@ -83,6 +83,6 @@ int main() {
     printf("\nList after removing \"%s\":\n", data_ref);
     ft_print_list(list);
 
-    ft_list_remove_if(&list, "", ft_strcmp, free_str); // remove all (non-matching dummy ref won't match anything)
+    ft_list_remove_if(&list, "two", ft_strcmp, free_str); // remove all (non-matching dummy ref won't match anything)
     return 0;
 }
