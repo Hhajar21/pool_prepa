@@ -12,7 +12,9 @@ int ft_strcmp(void *s1, void *s2){
 void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *)) {
     t_list *node;
     void *tmp;
-    if(!(*begin_list)|| !begin_list || !cmp)
+    if(!begin_list || !cmp)
+        return;
+    if(!(*begin_list))
         return;
     node = *begin_list;
     while (node->next != NULL)
@@ -27,7 +29,6 @@ void ft_list_sort(t_list **begin_list, int (*cmp)(void *, void *)) {
     }
     
 }
-
 void print_list(t_list *node){
     while (node != NULL)
     {
@@ -36,6 +37,23 @@ void print_list(t_list *node){
     }
     printf("NULL\n");
 }
+void ft_list_push_front(t_list **begin_list, void *data){
+    t_list *node = ft_create_elem(data);
+    if(!node)
+        return;
+    node->next = *begin_list;
+    *begin_list = node;
+}
+void ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)()){
+    t_list *node;
+    if(!(*begin_list)|| !begin_list || !cmp)
+        return;
+    node = *begin_list;
+    ft_list_push_front(&node, data);
+    ft_list_sort(&node, cmp);
+    *begin_list = node;
+}
+
 #include <string.h>
 int main(){
     t_list *node;
@@ -44,14 +62,12 @@ int main(){
     str[2] = strdup("two");
     str[1] = strdup("four");
     str[0] = strdup("one");
+    char data[] ="six";
     node = ft_list_push_strs(4, str);
     printf("the list is : \n");
-    printf("Compare 'one' and 'two': %d\n", ft_strcmp("four", "one"));
-    printf("Compare 'three' and 'four': %d\n", ft_strcmp("two", "three"));
-
     print_list(node);
     printf("the sort list is : \n");
-    ft_list_sort(&node, ft_strcmp);
+    ft_sorted_list_insert(&node,data,ft_strcmp);
     print_list(node);
 
 }
