@@ -2,7 +2,7 @@
 int ft_atoi(char *str){
     int  i = 0;
     int signe = 1;
-    int count_signe = 0;
+    //int count_signe = 0;
     int rest = 0;
     while (str[i] == 32 || (str[i] == '\t' && str[i] == '\r'))
         i++;

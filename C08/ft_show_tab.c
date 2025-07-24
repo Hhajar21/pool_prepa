@@ -1,41 +1,45 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <unistd.h>
 #include "ft_stock_str.h"
-int ft_strlen(char *str){
-	int i = 0;
-	while (str[i])
-		i++;
-	return i;
-}
-char *ft_strdup(char *src){
-int len_s = ft_strlen(src);
-char *new_arr = malloc(len_s + 1);
-int i = 0;
-	if(!new_arr)
-		return NULL;
-	while (src[i])
+void	put_nbr(int nb)
+{
+	unsigned int	n;
+
+	n = nb;
+	if (nb < 0)
 	{
-		new_arr[i] = src[i];
-		i++;
+		 write(1, "-", 1);
+		n *= -1;
 	}
-	new_arr[i] = '\0';
-	return new_arr;
-}
-struct s_stock_str *ft_strs_to_tab(int ac, char **av){
-	t_stock_str *rest;
-	int i = 0;
-	rest = (t_stock_str)malloc(sizeof(t_stock_str) * ac + 1);
-	if(!rest)
-		return NULL;
-	while (i < ac)
+	if (n < 10){
+		n = n + '0';
+        write(1, &n, 1);
+    }
+	else
 	{
-		rest[i].str = av[i];
-		rest[i].size = ft_strlen(av[i]);
-		rest[i].copy = ft_strdup(av[i]);
-		if(res[i].copy == NULL)
-			return NULL;
-		i++;
+		put_nbr(n / 10);
+		put_nbr(n % 10);
 	}
-	rest[i].size = 0;
-	return rest;
+}
+void	put_str(char *str)
+{
+	while (*str)
+		write(1, str++, 1);
+}
+
+
+void ft_show_tab(struct s_stock_str *par){
+    int	i;
+
+	i = 0;
+    while (par[i].str)
+    {
+        put_str(par[i].str);
+        write(1, "\n", 1);
+        put_nbr(par[i].size);
+		write(1, "\n", 1);
+		put_str(par[i].copy);
+		write(1, "\n", 1);
+		i++;
+    }
+    
 }
