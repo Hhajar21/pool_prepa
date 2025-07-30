@@ -9,7 +9,11 @@ char	*ft_itoa(int nbr){
     int signe = 0;
     // 12 hit hia a7dad likynin fl max int;
     if(nb == 0){
+        rest = malloc(sizeof(char) * 2);
+        if (!rest)
+            return NULL;
         rest[0] = '0';
+        rest[1] = '\0';
     }
     if(nb < 0){
         signe = 1;
@@ -37,6 +41,7 @@ char	*ft_itoa(int nbr){
         i--;
     }
     return rest;
+    
 }
 int main(){
     printf("%s\n", ft_itoa(-1337));
